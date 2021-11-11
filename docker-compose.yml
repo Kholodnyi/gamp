@@ -1,0 +1,14 @@
+---
+version: "3.7"
+services:
+  currency_rate:
+    build:
+      context: .
+      dockerfile: ./currency_rate/Dockerfile
+    container_name: currency_rate
+    restart: unless-stopped
+    env_file:
+      - 'env.currency_rate'
+    command: bash -c "python3 /app/main.py runserver"
+    volumes:
+      - ./currency_rate/:/app:ro
